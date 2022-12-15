@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
 
@@ -16,13 +16,27 @@ const TASKS = [
 ];
 
 const App = () => {
+  const [tasksData, setTasksData] = useState(TASKS);
+
+  const setTasksHandler = (id) => {
+    setTasksData((tasksData) => {
+      tasksData.map((task) => {
+        if (id === task.id) {
+          return { ...task, isComplete: !task.isComplete };
+        } else {
+          return task;
+        }
+      });
+    });
+  };
+
   return (
     <div className="App">
       <header className="App-header">
         <h1>Ada&apos;s Task List</h1>
       </header>
       <main>
-        <div>{<TaskList tasks={TASKS} />}</div>
+        <div>{<TaskList tasks={tasksData} setter={setTasksHandler} />}</div>
       </main>
     </div>
   );
