@@ -15,18 +15,30 @@ const TASKS = [
   },
 ];
 
+// Changes list elements matching predicateFunc using mutatorFunc
+const mapMutate = function (li, predicateFunc, mutatorFunc) {
+  return li.map((element) => {
+    if (predicateFunc(element)) {
+      return mutatorFunc(element);
+    } else {
+      return element;
+    }
+  });
+};
+
+// toggle the isComplete field of an task object
+// return a copy of the object with mutated
+// field.
+const toggleCompleteOnTask = (task) => {
+  return { ...task, isComplete: !task.isComplete };
+};
+
 const App = () => {
   const [tasksData, setTasksData] = useState(TASKS);
 
   const setTasksHandler = (id) => {
     setTasksData((tasksData) =>
-      tasksData.map((task) => {
-        if (id === task.id) {
-          return { ...task, isComplete: !task.isComplete };
-        } else {
-          return task;
-        }
-      })
+      mapMutate(tasksData, (task) => task.id === id, toggleCompleteOnTask)
     );
   };
 
