@@ -15,11 +15,6 @@ const TASKS = [
   },
 ];
 
-// Deletes an item from a list matching a predicate function.
-const filterDelete = function (li, predicateFunc) {
-  return li.filter(predicateFunc);
-};
-
 // Changes list elements matching predicateFunc using mutatorFunc
 const mapMutate = function (li, predicateFunc, mutatorFunc) {
   return li.map((element) => {
