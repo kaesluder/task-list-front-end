@@ -15,6 +15,11 @@ const TASKS = [
   },
 ];
 
+// Deletes an item from a list matching a predicate function.
+const filterDelete = function (li, predicateFunc) {
+  return li.filter(predicateFunc);
+};
+
 // Changes list elements matching predicateFunc using mutatorFunc
 const mapMutate = function (li, predicateFunc, mutatorFunc) {
   return li.map((element) => {
@@ -42,6 +47,10 @@ const App = () => {
     );
   };
 
+  const setDeleteHandler = (id) => {
+    setTasksData((tasksData) => tasksData.filter((task) => task.id !== id));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -49,7 +58,11 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList tasks={tasksData} setter={setTasksHandler} />
+          <TaskList
+            tasks={tasksData}
+            setter={setTasksHandler}
+            deleter={setDeleteHandler}
+          />
         </div>
       </main>
     </div>
