@@ -15,6 +15,11 @@ const TASKS = [
   },
 ];
 
+// Deletes items from task list matching id.
+const deleteTaskById = function (taskList, id) {
+  return taskList.filter((task) => task.id !== id);
+};
+
 // Changes list elements matching predicateFunc using mutatorFunc
 const mapMutate = function (li, predicateFunc, mutatorFunc) {
   return li.map((element) => {
@@ -36,14 +41,16 @@ const toggleCompleteOnTask = (task) => {
 const App = () => {
   const [tasksData, setTasksData] = useState(TASKS);
 
+  // Sets the complete status on a single task and modifies state.
   const setTasksHandler = (id) => {
     setTasksData((tasksData) =>
       mapMutate(tasksData, (task) => task.id === id, toggleCompleteOnTask)
     );
   };
 
+  // deletes a task matching id and modifies state.
   const setDeleteHandler = (id) => {
-    setTasksData((tasksData) => tasksData.filter((task) => task.id !== id));
+    setTasksData((tasksData) => deleteTaskById(tasksData, id));
   };
 
   return (
