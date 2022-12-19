@@ -30,6 +30,14 @@ const App = () => {
     );
   };
 
+  const unregisterTask = (id) => {
+    setTasksData((tasksData) =>
+      tasksData.filter((task) => {
+        return task.id !== id;
+      })
+    );
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -37,7 +45,11 @@ const App = () => {
       </header>
       <main>
         <div>
-          <TaskList tasks={tasksData} setter={setTasksHandler} />
+          <TaskList
+            tasks={tasksData}
+            setter={setTasksHandler}
+            onUnregister={unregisterTask}
+          />
         </div>
       </main>
     </div>

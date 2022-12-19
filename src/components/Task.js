@@ -15,7 +15,12 @@ const Task = (props) => {
       >
         {props.title}
       </button>
-      <button className="tasks__item__remove button">x</button>
+      <button
+        className="tasks__item__remove button"
+        onClick={() => props.onUnregister(props.id)}
+      >
+        x
+      </button>
     </li>
   );
 };
@@ -25,6 +30,7 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   isComplete: PropTypes.bool.isRequired,
   setter: PropTypes.func.isRequired,
+  onUnregister: PropTypes.func.isRequired,
 };
 
 export default Task;
