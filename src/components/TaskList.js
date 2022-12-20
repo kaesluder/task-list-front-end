@@ -5,6 +5,7 @@ import './TaskList.css';
 
 const TaskList = (props) => {
   const taskListHTML = props.tasks.map((task) => {
+    console.log(task);
     return (
       <Task
         key={task.id}

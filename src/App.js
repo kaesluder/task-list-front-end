@@ -52,9 +52,10 @@ const addNewTaskApi = (title, description) => {
   };
 
   return axios
-    .post(`${BASE_URL}/tasks`, { newTask })
+    .post(`${BASE_URL}/tasks`, newTask)
     .then((response) => {
-      return convertFromApi(response.data);
+      console.log(response.data);
+      return convertFromApi(response.data.task);
     })
     .catch((error) => console.log(error));
 };
@@ -115,6 +116,7 @@ const App = () => {
   const handleTaskSubmit = (title, description) => {
     addNewTaskApi(title, description)
       .then((newTask) => {
+        console.log(tasksData);
         setTasksData([...tasksData, newTask]);
       })
       .catch((err) => console.log(err));

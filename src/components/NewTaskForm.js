@@ -27,7 +27,7 @@ const NewTaskForm = (props) => {
         type="type"
         id="title"
         name="title"
-        defaultValue=""
+        value={title}
         onChange={handleNewTitle}
       />
       <label htmlFor="description">Task Description</label>
@@ -35,7 +35,7 @@ const NewTaskForm = (props) => {
         type="type"
         id="description"
         name="description"
-        defaultValue=""
+        value={description}
         onChange={handleNewDescription}
       />
       <div>
