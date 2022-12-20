@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import TaskList from './components/TaskList.js';
 import './App.css';
 import axios from 'axios';
+import NewTaskForm from './components/NewTaskForm.js';
 
 const BASE_URL = 'http://localhost:5000';
 
@@ -42,6 +43,20 @@ const removeTask = (id) => {
   return axios.delete(`${BASE_URL}/tasks/${id}`).catch((error) => {
     console.log(error);
   });
+};
+
+const addNewTaskApi = (title, description) => {
+  const newTask = {
+    title,
+    description,
+  };
+
+  return axios
+    .post(`${BASE_URL}/tasks`, { newTask })
+    .then((response) => {
+      return convertFromApi(response.data);
+    })
+    .catch((error) => console.log(error));
 };
 
 const App = () => {
@@ -97,6 +112,14 @@ const App = () => {
     // );
   };
 
+  const handleTaskSubmit = (title, description) => {
+    addNewTaskApi(title, description)
+      .then((newTask) => {
+        setTasksData([...tasksData, newTask]);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="App">
       <header className="App-header">
@@ -104,6 +127,7 @@ const App = () => {
       </header>
       <main>
         <div>
+          <NewTaskForm handleTaskSubmit={handleTaskSubmit} />
           <TaskList
             tasks={tasksData}
             setter={setTasksHandler}
