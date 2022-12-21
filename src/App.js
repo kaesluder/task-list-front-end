@@ -45,16 +45,11 @@ const removeTask = (id) => {
   });
 };
 
-const addNewTaskApi = (title, description) => {
-  const newTask = {
-    title,
-    description,
-  };
-
+const addNewTaskApi = (newTaskData) => {
   return axios
-    .post(`${BASE_URL}/tasks`, newTask)
+    .post(`${BASE_URL}/tasks`, newTaskData)
     .then((response) => {
-      console.log(response.data);
+      // console.log(response.data);
       return convertFromApi(response.data.task);
     })
     .catch((error) => console.log(error));
@@ -113,10 +108,10 @@ const App = () => {
     // );
   };
 
-  const handleTaskSubmit = (title, description) => {
-    addNewTaskApi(title, description)
+  const handleTaskSubmit = (data) => {
+    addNewTaskApi(data)
       .then((newTask) => {
-        console.log(tasksData);
+        // console.log(tasksData);
         setTasksData([...tasksData, newTask]);
       })
       .catch((err) => console.log(err));
