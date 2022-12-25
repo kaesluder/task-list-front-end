@@ -5,6 +5,7 @@ import './TaskList.css';
 
 const TaskList = (props) => {
   const taskListHTML = props.tasks.map((task) => {
+    console.log(task);
     return (
       <Task
         key={task.id}
@@ -12,6 +13,7 @@ const TaskList = (props) => {
         title={task.title}
         isComplete={task.isComplete}
         setter={props.setter}
+        onUnregister={props.onUnregister}
       />
     );
   });
@@ -27,6 +29,7 @@ TaskList.propTypes = {
     })
   ).isRequired,
   setter: PropTypes.func.isRequired,
+  onUnregister: PropTypes.func.isRequired,
 };
 
 export default TaskList;
